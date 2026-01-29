@@ -501,17 +501,26 @@
       
       if (targetElement) {
         e.preventDefault();
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
-        });
         
-        // Effet visuel: highlight la carte pendant 1s
-        targetElement.style.boxShadow = '0 0 30px rgba(22, 199, 132, 0.6)';
-        setTimeout(() => {
-          targetElement.style.transition = 'box-shadow 0.5s ease-out';
-          targetElement.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.05)';
-        }, 100);
+        // Traitement différent pour #competences (scroll au début) et #skill-* (scroll au centre avec highlight)
+        if (targetId === '#competences') {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        } else {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+          
+          // Effet visuel: highlight la carte pendant 1s
+          targetElement.style.boxShadow = '0 0 30px rgba(22, 199, 132, 0.6)';
+          setTimeout(() => {
+            targetElement.style.transition = 'box-shadow 0.5s ease-out';
+            targetElement.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.05)';
+          }, 100);
+        }
       }
     });
   });
